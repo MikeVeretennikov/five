@@ -67,8 +67,14 @@ class AddEdit(QMainWindow, Ui_AddEdit):
 
         self.view.show()
 
+        self.model.dataChanged.connect(self.method)
 
+    def method(self):
+        ex.model = QSqlTableModel(self, self.db)
+        ex.model.setTable('coffee')
+        ex.model.select()
 
+        ex.view.setModel(self.model)
 
     def add(self):
         name = self.name.text()
@@ -88,8 +94,11 @@ class AddEdit(QMainWindow, Ui_AddEdit):
 
         self.view.setModel(self.model)
 
+        ex.model = QSqlTableModel(self, self.db)
+        ex.model.setTable('coffee')
+        ex.model.select()
 
-
+        ex.view.setModel(self.model)
 
 
 if __name__ == '__main__':
